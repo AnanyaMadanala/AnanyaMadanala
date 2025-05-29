@@ -1,0 +1,50 @@
+#RegisterAuthenticator(Rmodel)
+package Rmodel;
+import Rdb.RDBConnector;
+import Rdto.RuserDTO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+ *
+ * @author Vipra
+ */
+public class RegisterAuthenticator {
+
+    private boolean e;
+    public boolean isRegister(RuserDTO user) 
+    {
+        String tablePassword="";
+        String password = user.getPassword();
+        String username = user.getUsername();
+        String lastname = user.getLastname();
+        String email = user.getEmail();
+        String mobile = user.getMobile();
+        String address = user.getAddress();
+        String branch = user.getBranch();
+        String year = user.getYear();
+        String percentage = user.getPercentage();
+        int i=0;
+        try
+        {
+            Statement st= RDBConnector.getStatement();
+            String query = "INSERT INTO emp1(`username`,`lastname`,`password`,`email`,`mobile`,`address`,`branch`,`year`,`percentage`) VALUES('"+username+"','"+lastname+"','"+password+"','"+email+"','"+mobile+"','"+address+"','"+branch+"','"+year+"','"+percentage+"')";
+            System.out.println("Query="+query);
+            
+            i = st.executeUpdate(query);
+            
+          
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+        if(username!=null && password!=null && lastname!=null && email!=null  && mobile!=null && address!=null && branch!=null && year!=null && percentage!=null && password.equals(tablePassword) && lastname.equals(tablePassword) && password.equals(tablePassword) && email.equals(tablePassword) && mobile.equals(tablePassword) && address.equals(tablePassword) && branch.equals(tablePassword) && year.equals(tablePassword) && percentage.equals(tablePassword))
+        {
+            return true;
+        }
+        return false;
+    }
+}
